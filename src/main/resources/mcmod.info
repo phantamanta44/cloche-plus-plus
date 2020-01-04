@@ -1,0 +1,17 @@
+[
+{
+  "modid": "clochepp",
+  "name": "Cloche++",
+  "description": "Makes garden cloches more garden-y!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["phantamanta44"],
+  "logoFile": "",
+  "screenshots": [],
+  "useDependencyInformation": true,
+  "dependencies": ["immersiveengineering", "agricraft", "mysticalagriculture", "mysticalagradditions"],
+  "requiredMods": ["immersiveengineering"]
+}
+]
