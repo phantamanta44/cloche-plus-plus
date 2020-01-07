@@ -31,7 +31,12 @@ public class AgriPlantHandler implements BelljarHandler.IPlantHandler {
 
     private static final Random rand = new Random();
 
+    private final boolean seedDrops;
     private final Map<IAgriPlant, AgriPlantData> cachedPlantInfo = new HashMap<>();
+
+    public AgriPlantHandler(boolean seedDrops) {
+        this.seedDrops = seedDrops;
+    }
 
     @Override
     public boolean isCorrectSoil(ItemStack seedStack, ItemStack soilStack) {
@@ -81,7 +86,7 @@ public class AgriPlantHandler implements BelljarHandler.IPlantHandler {
         return SoilType.DIRT.test(soilStack) ? new ItemStack(Blocks.FARMLAND) : soilStack;
     }
 
-    private static class AgriPlantData {
+    private class AgriPlantData {
 
         private final IAgriPlant plant;
         private final double growthChanceBase, growthChanceAdditional;
@@ -127,7 +132,7 @@ public class AgriPlantHandler implements BelljarHandler.IPlantHandler {
             for (int i = (stats.getGain() + 3) / 3; i > 0; i--) {
                 plant.getHarvestProducts(drops::add, crop, stats, rand);
             }
-            if (rand.nextDouble() < spreadChance) {
+            if (seedDrops && rand.nextDouble() < spreadChance) {
                 AgriApi.getStatCalculatorRegistry().valueOf(plant)
                         .map(c -> new AgriSeed(plant, c.calculateSpreadStats(plant, Collections.singletonList(crop))))
                         .ifPresent(s -> drops.add(s.toStack()));

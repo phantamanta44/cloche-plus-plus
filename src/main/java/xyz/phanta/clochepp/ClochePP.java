@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 public class ClochePP {
 
     public static final String MOD_ID = "clochepp";
-    public static final String VERSION = "1.0.0";
+    public static final String VERSION = "1.0.1";
 
     @SuppressWarnings("NotNullFieldNotInitialized")
     @Mod.Instance(MOD_ID)
