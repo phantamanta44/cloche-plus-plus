@@ -11,9 +11,9 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "1.0.1"
+version = "1.0.2"
 group = "xyz.phanta.clochepp"
-archivesBaseName = "cloche-plus-plus-1.12.2"
+archivesBaseName = "cloche-profit-peripheral-1.12.2"
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {

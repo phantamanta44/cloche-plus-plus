@@ -24,6 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import xyz.phanta.clochepp.cloche.SimplePlantHandler;
 import xyz.phanta.clochepp.cloche.SoilType;
 import xyz.phanta.clochepp.util.FloatUtils;
+import xyz.phanta.clochepp.util.RepeatCollection;
 
 import java.util.*;
 
@@ -31,11 +32,11 @@ public class AgriPlantHandler implements BelljarHandler.IPlantHandler {
 
     private static final Random rand = new Random();
 
-    private final boolean seedDrops;
+    private final int seedDropNeighborCount;
     private final Map<IAgriPlant, AgriPlantData> cachedPlantInfo = new HashMap<>();
 
-    public AgriPlantHandler(boolean seedDrops) {
-        this.seedDrops = seedDrops;
+    public AgriPlantHandler(int seedDropNeighborCount) {
+        this.seedDropNeighborCount = seedDropNeighborCount;
     }
 
     @Override
@@ -132,10 +133,15 @@ public class AgriPlantHandler implements BelljarHandler.IPlantHandler {
             for (int i = (stats.getGain() + 3) / 3; i > 0; i--) {
                 plant.getHarvestProducts(drops::add, crop, stats, rand);
             }
-            if (seedDrops && rand.nextDouble() < spreadChance) {
-                AgriApi.getStatCalculatorRegistry().valueOf(plant)
-                        .map(c -> new AgriSeed(plant, c.calculateSpreadStats(plant, Collections.singletonList(crop))))
-                        .ifPresent(s -> drops.add(s.toStack()));
+            if (seedDropNeighborCount > 0 && rand.nextDouble() < spreadChance) {
+                if (seedDropNeighborCount == 1) {
+                    drops.add(seed.toStack());
+                } else {
+                    AgriApi.getStatCalculatorRegistry().valueOf(plant)
+                            .map(c -> new AgriSeed(plant,
+                                    c.calculateSpreadStats(plant, new RepeatCollection<>(crop, seedDropNeighborCount))))
+                            .ifPresent(s -> drops.add(s.toStack()));
+                }
             }
             return drops.toArray(SimplePlantHandler.NO_STACKS);
         }

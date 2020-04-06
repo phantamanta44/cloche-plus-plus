@@ -22,4 +22,14 @@ public class CppConfig {
     @Config.RequiresMcRestart
     public static double mystAgriFertStrength = 1.65D;
 
+    @Config.Comment({
+            "The number of simulated neighboring plants to use for generating AgriCraft seeds.",
+            "If set to 0, no seeds will be dropped whatsoever.",
+            "If set to 1, seed drops will be a clone of the original seed REGARDLESS of how AgriCraft is configured.",
+            "AgriCraft's built-in \"single spread stat increase\" option is equivalent to setting this to 2."
+    })
+    @Config.RangeInt(min = 0, max = 8)
+    @Config.RequiresMcRestart
+    public static int agriCraftSeedSpreadNeighborCount = 1;
+
 }

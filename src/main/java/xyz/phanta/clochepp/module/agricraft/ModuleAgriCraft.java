@@ -1,6 +1,7 @@
 package xyz.phanta.clochepp.module.agricraft;
 
 import blusunrize.immersiveengineering.api.tool.BelljarHandler;
+import xyz.phanta.clochepp.CppConfig;
 import xyz.phanta.clochepp.module.ClocheModule;
 import xyz.phanta.clochepp.moduleapi.ClocheComponent;
 import xyz.phanta.clochepp.moduleapi.ClocheRegistrar;
@@ -16,13 +17,12 @@ public class ModuleAgriCraft implements ClocheModule {
 
     public static final String MOD_ID = "agricraft";
 
-    private ClocheComponent cAgriCraftPlants, cForcePriority, cSeedDrops;
+    private ClocheComponent cAgriCraftPlants, cForcePriority;
 
     @Override
     public void registerComponents(ComponentRegistrar registrar) {
         cAgriCraftPlants = registrar.registerComponent("agricraft_plants");
         cForcePriority = registrar.registerComponent("force_priority");
-        cSeedDrops = registrar.registerComponent("seed_drops");
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ModuleAgriCraft implements ClocheModule {
     }
 
     private BelljarHandler.IPlantHandler createPlantHandler() {
-        return new AgriPlantHandler(cSeedDrops.isEnabled());
+        return new AgriPlantHandler(CppConfig.agriCraftSeedSpreadNeighborCount);
     }
 
 }
