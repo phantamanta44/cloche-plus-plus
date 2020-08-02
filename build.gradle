@@ -2,16 +2,19 @@ buildscript {
     repositories {
         jcenter()
         maven { url = "http://files.minecraftforge.net/maven" }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath "com.wynprice.cursemaven:CurseMaven:2.1.4"
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: "com.wynprice.cursemaven"
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "1.0.2"
+version = "1.0.3"
 group = "xyz.phanta.clochepp"
 archivesBaseName = "cloche-profit-peripheral-1.12.2"
 
@@ -30,16 +33,14 @@ minecraft {
 repositories {
     maven { url 'https://jitpack.io/' }
     maven { url 'https://maven.blamejared.com/' }
-    maven { url 'https://tehnut.info/maven/' }
-    maven { url 'https://minecraft.curseforge.com/api/maven/' }
     mavenLocal()
 }
 
 dependencies {
     compile 'com.github.phantamanta44:jsr305:1.0.1'
     deobfCompile 'blusunrize:ImmersiveEngineering:0.12-92-559'
-    deobfCompile 'infinitylib:infinitylib:1.12.0'
-    deobfCompile 'com.infinityraider.agricraft:AgriCraft:2.12.0-1.12.0-a6'
+    deobfCompile 'curse.maven:infinitylib:2537265' // 1.12.0
+    deobfCompile 'curse.maven:agricraft:2609648' // 2.12.0-a6
 }
 
 processResources {

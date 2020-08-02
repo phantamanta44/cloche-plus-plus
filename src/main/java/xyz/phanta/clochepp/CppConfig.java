@@ -5,7 +5,10 @@ import net.minecraftforge.common.config.Config;
 @Config(modid = ClochePP.MOD_ID)
 public class CppConfig {
 
-    @Config.Comment("A list of IDs of Cloche++ modules that should not be loaded.")
+    @Config.Comment({
+            "A list of IDs of Cloche++ modules that should not be loaded.",
+            "Existing modules are: agricraft, mysticalagradditions, mysticalagriculture"
+    })
     @Config.RequiresMcRestart
     public static String[] disabledModules = {};
 
@@ -31,5 +34,13 @@ public class CppConfig {
     @Config.RangeInt(min = 0, max = 8)
     @Config.RequiresMcRestart
     public static int agriCraftSeedSpreadNeighborCount = 1;
+
+    @Config.Comment({
+            "The growth rate modifier for AgriCraft plants.",
+            "Normally, the this is calculated based on the AgriCraft growth rate compared to that of vanilla plants.",
+            "If you want to tweak it further, this multiplier will be applied to the growth rate. This should probably be >0."
+    })
+    @Config.RangeDouble(min = 0)
+    public static double agriCraftGrowthRateModifier = 1D;
 
 }

@@ -21,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import xyz.phanta.clochepp.CppConfig;
 import xyz.phanta.clochepp.cloche.SimplePlantHandler;
 import xyz.phanta.clochepp.cloche.SoilType;
 import xyz.phanta.clochepp.util.FloatUtils;
@@ -123,7 +124,8 @@ public class AgriPlantHandler implements BelljarHandler.IPlantHandler {
             // so we advance `p/q` growth per growth step to exactly match the expectation (minus truncation)
             // divide by 40 based on vanilla crops having 8 growth stages and requiring 320 ticks to grow in a cloche
             return (float)((growthChanceBase + growthChanceAdditional * seedStats.getGrowth())
-                    * AgriCraftConfig.growthMultiplier / growthStages) * fertilizer / 40F;
+                    * AgriCraftConfig.growthMultiplier / growthStages) * fertilizer / 40F
+                    * (float)CppConfig.agriCraftGrowthRateModifier;
         }
 
         public ItemStack[] getDrops(AgriSeed seed, ItemStack soilStack, TileEntity tile) {
