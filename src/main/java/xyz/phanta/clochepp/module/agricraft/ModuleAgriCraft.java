@@ -1,7 +1,6 @@
 package xyz.phanta.clochepp.module.agricraft;
 
 import blusunrize.immersiveengineering.api.tool.BelljarHandler;
-import xyz.phanta.clochepp.CppConfig;
 import xyz.phanta.clochepp.module.ClocheModule;
 import xyz.phanta.clochepp.moduleapi.ClocheComponent;
 import xyz.phanta.clochepp.moduleapi.ClocheRegistrar;
@@ -32,17 +31,13 @@ public class ModuleAgriCraft implements ClocheModule {
                 // force priority for this handler so other handlers don't get to agricraft-enabled seeds first
                 HashSet<BelljarHandler.IPlantHandler> handlers = ImmEngReflect.getPlantHandlers();
                 HashSet<BelljarHandler.IPlantHandler> newSet = new LinkedHashSet<>();
-                newSet.add(createPlantHandler());
+                newSet.add(new AgriPlantHandler());
                 newSet.addAll(handlers);
                 ImmEngReflect.setPlantHandlers(newSet);
             } else {
-                registrar.registerPlantHandler(createPlantHandler());
+                registrar.registerPlantHandler(new AgriPlantHandler());
             }
         });
-    }
-
-    private BelljarHandler.IPlantHandler createPlantHandler() {
-        return new AgriPlantHandler(CppConfig.agriCraftSeedSpreadNeighborCount);
     }
 
 }

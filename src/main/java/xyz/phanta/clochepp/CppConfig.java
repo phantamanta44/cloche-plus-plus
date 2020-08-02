@@ -22,7 +22,6 @@ public class CppConfig {
 
     @Config.Comment("The strength of mystical agriculture fertilizer, if that component is enabled.")
     @Config.RangeDouble(min = 0D)
-    @Config.RequiresMcRestart
     public static double mystAgriFertStrength = 1.65D;
 
     @Config.Comment({
@@ -32,7 +31,6 @@ public class CppConfig {
             "AgriCraft's built-in \"single spread stat increase\" option is equivalent to setting this to 2."
     })
     @Config.RangeInt(min = 0, max = 8)
-    @Config.RequiresMcRestart
     public static int agriCraftSeedSpreadNeighborCount = 1;
 
     @Config.Comment({

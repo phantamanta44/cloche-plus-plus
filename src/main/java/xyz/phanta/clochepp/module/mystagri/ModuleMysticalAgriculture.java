@@ -26,7 +26,7 @@ public class ModuleMysticalAgriculture implements ClocheModule {
         SimpleFertilizerItemHandler handler = new SimpleFertilizerItemHandler(false, false);
         cMysticalFertilizer.ifEnabled(() -> handler.addEntry(
                 new SimpleFertilizerItemHandler.Entry(new ItemStack(MysticalAgricultureContent.MYSTICAL_FERTILIZER),
-                        (float)CppConfig.mystAgriFertStrength)));
+                        () -> (float)CppConfig.mystAgriFertStrength)));
         if (!handler.isEmpty()) {
             registrar.registerFertilizerItemHandler(handler);
         }

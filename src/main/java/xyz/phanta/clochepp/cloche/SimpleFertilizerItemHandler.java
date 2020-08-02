@@ -4,6 +4,7 @@ import blusunrize.immersiveengineering.api.tool.BelljarHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import xyz.phanta.clochepp.util.ComparableItemMap;
+import xyz.phanta.clochepp.util.FloatSupplier;
 
 public class SimpleFertilizerItemHandler implements BelljarHandler.ItemFertilizerHandler {
 
@@ -28,17 +29,21 @@ public class SimpleFertilizerItemHandler implements BelljarHandler.ItemFertilize
 
     @Override
     public float getGrowthMultiplier(ItemStack fertilizerStack, ItemStack seedStack, ItemStack soilStack, TileEntity tile) {
-        return entries.lookup(fertilizerStack).map(e -> e.multiplier).orElse(1F);
+        return entries.lookup(fertilizerStack).map(Entry::getMultiplier).orElse(1F);
     }
 
     public static class Entry {
 
         private final ItemStack stack;
-        private final float multiplier;
+        private final FloatSupplier multiplierGetter;
 
-        public Entry(ItemStack stack, float multiplier) {
+        public Entry(ItemStack stack, FloatSupplier multiplierGetter) {
             this.stack = stack;
-            this.multiplier = multiplier;
+            this.multiplierGetter = multiplierGetter;
+        }
+
+        public float getMultiplier() {
+            return multiplierGetter.get();
         }
 
     }
